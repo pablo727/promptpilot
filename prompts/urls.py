@@ -1,10 +1,6 @@
-from rest_framework.routers import DefaultRouter
+from django.urls import path, include
+from .routers import router
 
-from .views import PromptViewSet, PromptRatingViewSet
-
-router = DefaultRouter()
-router.register(r"prompts", PromptViewSet)
-router.register(r"ratings", PromptRatingViewSet)
-
-
-urlpatterns = router.urls
+urlpatterns = [
+    path("", include(router.urls)),
+]
