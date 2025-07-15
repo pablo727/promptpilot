@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     # Local
     "users.apps.UsersConfig",
     "prompts.apps.PromptsConfig",
+    "playgrounds.apps.PlaygroundsConfig",
 ]
 
 MIDDLEWARE = [
