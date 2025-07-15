@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     # 3rd-party apps
     "rest_framework",
     "corsheaders",
+    "django_extensions",
     # Local
     "users.apps.UsersConfig",
     "prompts.apps.PromptsConfig",

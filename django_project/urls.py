@@ -39,6 +39,5 @@ urlpatterns = [
     path("logout/", custom_logout, name="logout"),
     path("admin/", admin.site.urls),
     path("api/v1/", include("prompts.urls")),
-    path("api/v1/playgrounds/", include("playgrounds.urls")),
     path("", home, name="home"),
 ]

@@ -1,4 +1,4 @@
-from .openai_service.py import OpenAIService
+from .openai_service import OpenAIService
 
 
 def get_llm_service(provider_name):
