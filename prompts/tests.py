@@ -8,8 +8,8 @@ from .serializers import PromptRatingSerializer
 
 
 class PromptManagerTests(TestCase):
-    def test_prompt_str_method(self):
 
+    def test_prompt_str_method(self):
         User = get_user_model()
         user = User.objects.create_user(username="testuser", password="testpass1234")
         long_content = "A" * 60

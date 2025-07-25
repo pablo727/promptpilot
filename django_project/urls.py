@@ -40,4 +40,5 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/v1/", include("prompts.urls")),
     path("", home, name="home"),
+    *jwt_patterns,
 ]

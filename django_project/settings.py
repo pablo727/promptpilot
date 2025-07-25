@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "users.apps.UsersConfig",
     "prompts.apps.PromptsConfig",
     "playgrounds.apps.PlaygroundsConfig",
+    "chatmessages.apps.ChatmessagesConfig",
 ]
 
 MIDDLEWARE = [

@@ -21,12 +21,18 @@ class PromptRatingSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("You have already rated this prompt.")
         return data
 
+    def create(self, validated_data):
+        request = self.context.get("request")
+        validated_data["user"] = request.user
+        return super().create(validated_data)
+
 
 class PromptSerializer(serializers.ModelSerializer):
     ratings = PromptRatingSerializer(many=True, read_only=True)
 
     class Meta:
         fields = (
+            "id",
             "user",
             "content",
             "created_at",
@@ -37,4 +43,6 @@ class PromptSerializer(serializers.ModelSerializer):
         model = Prompt
 
     def create(self, validated_data):
-        return Prompt.objects.create(**validated_data)
+        request = self.context.get("request")
+        validated_data["user"] = request.user
+        return super().create(validated_data)

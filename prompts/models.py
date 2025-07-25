@@ -5,6 +5,7 @@ from django.db import models
 class Prompt(models.Model):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     content = models.TextField()
+    provider = models.CharField(max_length=100, default="ollama")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     is_public = models.BooleanField(default=False)

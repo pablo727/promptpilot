@@ -5,6 +5,7 @@ from rest_framework.response import Response
 from .views import PromptViewSet, PromptRatingViewSet
 from users.views import UserViewSet
 from playgrounds.views import RunPromptViewSet
+from chatmessages.views import ChatMessageViewSet
 
 
 class PromptPilotView(APIRootView):
@@ -47,3 +48,4 @@ router.register(r"users", UserViewSet, basename="user")
 router.register(r"prompts", PromptViewSet, basename="prompt")
 router.register(r"ratings", PromptRatingViewSet, basename="promptrating")
 router.register(r"playgrounds_run", RunPromptViewSet, basename="runprompt")
+router.register(r"chatmessages", ChatMessageViewSet, basename="chatmessage")
