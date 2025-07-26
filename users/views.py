@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
+from django.urls import reverse_lazy
+from django.views.generic import CreateView
+
 from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
@@ -9,6 +12,7 @@ from rest_framework.response import Response
 
 from .models import CustomUser
 from .serializers import CustomUserSerializer, CustomUserSignupSerializer
+from .forms import CustomUserCreationForm
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -40,3 +44,9 @@ def home(request):
 def custom_logout(request):
     logout(request)
     return redirect("login")
+
+
+class SignUpView(CreateView):
+    form_class = CustomUserCreationForm
+    success_url = reverse_lazy("login")
+    template_name = "registration/signup.html"

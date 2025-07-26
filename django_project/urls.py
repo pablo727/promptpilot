@@ -24,6 +24,7 @@ from rest_framework_simplejwt.views import (
 )
 
 from users.views import home, custom_logout
+from prompts.routers import router as api_router
 
 jwt_patterns = [
     path("api/v1/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
@@ -31,6 +32,7 @@ jwt_patterns = [
 ]
 
 urlpatterns = [
+    path("users/", include("users.urls")),
     path(
         "login/",
         auth_views.LoginView.as_view(template_name="registration/login.html"),

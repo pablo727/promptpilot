@@ -4,12 +4,18 @@
 {% block title %}Home{% endblock title %}
 
 {% block content %}
-{% if user.is_authenticated %}
-<p>Hi {{ user.username }}!</p>
-<p><a href="{% url 'logout' %}">Log Out</a></p>
-{% else %}
-<p>You are not logged in</p>
-<a href="{% url 'login' %}">Log In</a> |
-<a href="{% url 'signup' %}">Sign Up</a>
-{% endif %}
+<div class="p-5 bg-dark bg-opacity-75 rounded">
+    {% if user.is_authenticated %}
+    <h1 class="mb-3">Welcome back, {{ user.username }}!</h1>
+    <p>You're logged in ready to explore the prompt playground.</p>
+    <a class="btn btn-primary mt-3" href="/playgrounds/">Go to Playground</a>
+    {% else %}
+    <h1 class="mb-3">Welcome to Prompt Pilot</h1>
+    <p class="lead">Your AI chat & prompt lab — from your terminal to the cloud.</p>
+    <div class="mt-4">
+        <a class="btn btn-success me-2" href="{% url 'login' %}">Log In</a>
+        <a class="btn btn-outline-light" href="{% url 'signup' %}">Sign Up</a>
+    </div>
+    {% endif %}
+</div>
 {% endblock content %}
