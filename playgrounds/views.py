@@ -1,3 +1,5 @@
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
@@ -7,6 +9,7 @@ from rest_framework import status
 from .serializers import PromptTestRunSerializer
 from .models import Prompt
 from .services.factory import get_llm_service
+from prompts.models import Prompt
 
 
 class RunPromptViewSet(ViewSet):
@@ -36,3 +39,9 @@ class RunPromptViewSet(ViewSet):
         )
         serializer = PromptTestRunSerializer(test_run)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+@login_required
+def playground_page(request):
+    prompts = Prompt.objects.all()
+    return render(request, "playgrounds/playground.html", {"prompts": prompts})

@@ -1,0 +1,65 @@
+<!-- templates/playgrounds/playground.html -->
+{% extends 'base.html' %}
+
+{% block title %}Prompt Playground{% endblock title %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-3">🎮 Prompt Playground</h2>
+    <form method="post" id="run-form">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="prompt" class="form-label">Select Prompt:</label>
+            <select class="form-select" id="prompt" name="prompt">
+                {% for prompt in prompts %}
+                <option value="{{ prompt.id }}">{{ prompt.title }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="provider" class="form-label">LLM Provider:</label>
+            <input type="text" class="form-control" id="provider" name="provider" value="ollama">
+        </div>
+
+        <div class="mb-3">
+            <label for="input-variables" class="form-label">Input Variables (JSON):</label>
+            <textarea class="form-control" name="input-variables" rows="4">{}</textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Run Prompt</button>
+    </form>
+
+    <div class="mt-4" id="result-box" style="white-space: pre-wrap;;"></div>
+</div>
+
+<script>
+    const form = document.getElementById("run-form");
+    const resultBox = document.getElementById("result-box");
+
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        resultBox.innerText = "⏳ Runnning... "
+
+        const data = {
+            prompt: form.prompt.value,
+            provider: form.provider.value,
+            input_variables: JSON.parse(form.input_variables.value || "{}")
+        };
+
+        const res = await fetch("/api/v1/playgrounds/run/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": form.csrfmiddlewaretoken.value
+            },
+            body: JSON.stringify(data)
+        });
+
+        const json = await res.json();
+        if (res.ok) {
+            resultBox.innerText = `✅ ${json.result}`;
+        } else {
+            resultBox.innerText = `❌ Error: ${JSON.stringify(json)}`;
+        }
+    });
+</script>
+{% endblock content %}

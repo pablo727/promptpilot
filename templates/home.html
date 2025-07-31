@@ -4,11 +4,23 @@
 {% block title %}Home{% endblock title %}
 
 {% block content %}
-<div class="p-5 bg-dark bg-opacity-75 rounded">
+<div class="bg-secondary bg-opacity-75 rounded text-white p-4 w-100" style="max-width: 720px;">
     {% if user.is_authenticated %}
-    <h1 class="mb-3">Welcome back, {{ user.username }}!</h1>
-    <p>You're logged in ready to explore the prompt playground.</p>
-    <a class="btn btn-primary mt-3" href="/playgrounds/">Go to Playground</a>
+    <h2 class="mb-2">Welcome back, {{ user.username }}!</h2>
+    <p class="mb-3">You're logged in ready to explore the prompt playground.</p>
+    <div class="d-flex flex-wrap justify-content-center gap-2">
+
+        <!-- playground button -->
+        <a class="btn btn-primary" href="/playgrounds/">🎮 Go to Playground</a>
+
+        <!-- DRF browsable API -->
+        <a class="btn btn-outline-info" href="/api/v1/">📡 API Endpoint</a>
+
+        <!-- direct chat endpoint -->
+        <a class="btn btn-warning mt-3" href="/api/v1/playgrounds/run/">💬 Chat with Mistral API</a>
+    </div>
+
+
     {% else %}
     <h1 class="mb-3">Welcome to Prompt Pilot</h1>
     <p class="lead">Your AI chat & prompt lab — from your terminal to the cloud.</p>
