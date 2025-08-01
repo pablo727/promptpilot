@@ -12,6 +12,7 @@ class ChatMessage(models.Model):
     )
     message = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
+    is_flagged = models.BooleanField(default=True)
 
     def __str__(self):
         return f"[{self.timestamp}] {self.user.username} ({self.role}): {self.message[:30]}..."
