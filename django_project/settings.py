@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "corsheaders",
     "django_extensions",
+    "crispy_forms",
     # Local
     "users.apps.UsersConfig",
     "prompts.apps.PromptsConfig",
@@ -161,3 +162,5 @@ SIMPLE_JWT = {
     "ROTATE_REFRESH_TOKENS": True,
     "AUTH_HEADER_TYPES": ("Bearer",),
 }
+
+CRISPY_TEMPLATE_PACK = "bootstrap5"
