@@ -3,6 +3,7 @@ from rest_framework.viewsets import ModelViewSet
 
 from .models import ChatMessage
 from .serializers import ChatMessageSerializer
+from .ml_service import is_flagged_message
 
 
 class ChatMessageViewSet(ModelViewSet):
@@ -15,5 +16,8 @@ class ChatMessageViewSet(ModelViewSet):
         return ChatMessage.objects.filter(user=self.request.user).order_by("-timestamp")
 
     def perform_create(self, serializer):
+        message_text = serializer.validated_data.get("message", "")
+        flagged = is_flagged_message(message_text)  # 🧠 ML prediction
+
         # Automatically associate the message with the logged-in user
-        serializer.save(user=self.request.user)
+        serializer.save(user=self.request.user, is_flagged=flagged)
