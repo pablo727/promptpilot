@@ -23,7 +23,8 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 
-from users.views import home, custom_logout
+from users.forms import CustomLoginForm
+from users.views import home, custom_logout, SignUpView
 from prompts.routers import router as api_router
 
 jwt_patterns = [
@@ -32,10 +33,13 @@ jwt_patterns = [
 ]
 
 urlpatterns = [
+    path("signup/", SignUpView.as_view(), name="signup"),
     path("users/", include("users.urls")),
     path(
         "login/",
-        auth_views.LoginView.as_view(template_name="registration/login.html"),
+        auth_views.LoginView.as_view(
+            template_name="registration/login.html", authentication_form=CustomLoginForm
+        ),
         name="login",
     ),
     path("logout/", custom_logout, name="logout"),

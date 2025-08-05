@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "corsheaders",
     "django_extensions",
     "crispy_forms",
+    "crispy_bootstrap4",
     # Local
     "users.apps.UsersConfig",
     "prompts.apps.PromptsConfig",
@@ -163,4 +164,5 @@ SIMPLE_JWT = {
     "AUTH_HEADER_TYPES": ("Bearer",),
 }
 
-CRISPY_TEMPLATE_PACK = "bootstrap5"
+CRISPY_ALLOWED_TEMPLATE_PACKS = ["bootstrap4"]
+CRISPY_TEMPLATE_PACK = "bootstrap4"
