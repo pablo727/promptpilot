@@ -10,9 +10,10 @@
         <h2 class="card-title mb-4">Log In</h2>
         <form method="post" action="{% url 'login' %}">
             {% csrf_token %}
-            {% crispy form %}
+            {{ form|crispy }}
             <p>Don't have an account? <a href="{% url 'users:signup' %}">Sign up here</a></p>
         </form>
+        <p><a href="{% url 'password_reset' %}">Forgot your password?</a></p>
     </div>
 </div>
 {% endblock content %}

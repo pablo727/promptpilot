@@ -10,7 +10,7 @@
         <h2 class="card-title mb-4">Sign Up</h2>
         <form method="post" action="{% url 'signup' %}">
             {% csrf_token %}
-            {% crispy form %}
+            {{ form|crispy }}
         </form>
     </div>
 </div>

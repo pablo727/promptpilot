@@ -50,3 +50,31 @@ class UsersManagersTests(TestCase):
         self.assertTrue(user.is_active)
         self.assertFalse(user.is_staff)
         self.assertFalse(user.is_superuser)
+
+    def test_login(self):
+        User = get_user_model()
+        user = User.objects.create_user(
+            username="testuser",
+            email="testuserexample@example.com",
+            password="testpass1234",
+        )
+
+        # Test login with the Django test client
+        login = self.client.login(username="testuser", password="testpass1234")
+        self.assertTrue(login)
+
+        # Access a view that requires login (adjust URL as needed)
+        response = self.client.get("/users/home/")
+        self.assertEqual(response.status_code, 200)
+
+    def test_failed_login(self):
+        response = self.client.post(
+            "/login/",
+            {
+                "username": "wronguser",
+                "password": "wrongpass",
+            },
+        )
+        self.assertContains(
+            response, "Please enter a correct username and password", status_code=200
+        )
