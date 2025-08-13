@@ -3,8 +3,8 @@
 # get_token.sh - Automatically fetch a new access token and save it to the root .env
 
 API_URL="http://127.0.0.1:8000/api/v1/token/"
-USERNAME=${1:-admin}
-PASSWORD=${2:-pablosk8}
+USERNAME=${1:-your-username-here}
+PASSWORD=${2:-your-password-here}
 
 # Path to your project root .env
 ENV_FILE="$(dirname "$0")/../.env"
