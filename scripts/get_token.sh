@@ -14,8 +14,6 @@ RESPONSE=$(curl -s -X POST http://localhost:8000/api/v1/token/ \
   -H "Content-Type: application/json" \
   -d "{\"username\": \"$USERNAME\", \"password\": \"$PASSWORD\"}")
 
-# DEBUG: Print raw response for inspection
-echo "🔍 Raw response: $RESPONSE"
 
 # Extract token
 TOKEN=$(echo "$RESPONSE" | jq -r '.access')
@@ -28,8 +26,9 @@ if [ "$TOKEN" != "null" ] && [ -n "$TOKEN" ]; then
     echo "ACCESS_TOKEN=\"$TOKEN\"" >> "$ENV_FILE"
   fi
   export ACCESS_TOKEN="$TOKEN"
-  echo "✅ Access token saved to .env in project root and exported to shell."
+  echo "$TOKEN"
 else
-  echo "❌ Failed to get token. Response:"
-  echo "$RESPONSE"
+  echo "❌ Failed to get token. Response:" >&2
+  echo "$RESPONSE" >&2
 fi
+
