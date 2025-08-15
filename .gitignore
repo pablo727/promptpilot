@@ -5,3 +5,4 @@ __pycache__/
 .env
 .env.local
 staticfiles/
+chatmessages/flag_model.joblib
