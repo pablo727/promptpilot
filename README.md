@@ -39,6 +39,25 @@ It connects to [Ollama](https://ollama.ai/)’s Mistral model for AI-powered cha
 
 ---
 
+## **Screenshots**
+
+### 🖥️ Home Page
+![Home Page](images/home.png)
+
+### 💬 Terminal Chat with Mistral
+![Mistral Chat](images/mistral_chat.png)
+
+### 🔌 API Playground
+![API Playground](images/prompt_pilot_api.png)
+
+### 🔑 Password Reset Flow
+![Password Reset](images/reset_password.png)
+
+### 📜 Chat Message History
+![Chat Messages](images/chat_message_list.png)
+
+---
+
 ## **Project Structure**
 
 ```bash
